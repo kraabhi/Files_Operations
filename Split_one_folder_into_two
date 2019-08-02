@@ -1,0 +1,21 @@
+import glob
+#folders_path = os.path.join('/home/eleven/data_traffic/data/merge/', '/home/eleven/data_traffic/data/Test_new/')
+
+folders_path = "/home/eleven/data_traffic/data/merge/"
+folders = np.array(glob.glob(os.path.join(folders_path, '*')))
+
+nb_folders = len(folders)
+folder_idx = np.arange(nb_folders)
+np.random.shuffle(folder_idx)
+
+folders_train = folders[folder_idx[:int(nb_folders*0.7)]]
+folders_test = folders[folder_idx[int(nb_folders*0.7):]]
+
+dest_train_fold = "/home/eleven/data_traffic/data/Train_new/"
+dest_folder = '/home/eleven/data_traffic/data/Test_new/'
+for folder in folders_test:
+    #print('Moving {} to {}'.format(folder, dest_folder))
+    shutil.move(folder, dest_folder)
+
+for folder in folders_train:
+    shutil.move(folder , dest_train_fold)
