@@ -1,0 +1,2 @@
+with open('/home/eleven/data_traffic/data/train.txt', mode='wt', encoding='utf-8') as myfile:
+    myfile.write('\n'.join(list))
