@@ -1,5 +1,6 @@
-import json
+# csv to json
 
+import json
 import pandas as pd
 
 f2 = open('annotations.json')
@@ -10,3 +11,23 @@ types=useful_input['types']
 values = pd.DataFrame(imgs)
 df =pd.DataFrame.from_dict(values.to_dict(), orient='index')
 df.to_csv('annotations.csv')
+
+
+# csv to json
+
+import csv
+import json
+
+csv_path = "train_annotation_csv.csv"
+json_path = "train_annotation.json"
+
+data = {}
+with open(csv_path) as f:
+    csvReader = csv.DictReader(f)
+    for rows in csvReader:
+        id = rows["id"]
+        data[id] = rows
+        
+with open(json_path , 'w') as j:
+    j.write(json.dumps(data, indent = 4))
+    
