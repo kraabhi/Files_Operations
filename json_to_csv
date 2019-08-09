@@ -1,0 +1,12 @@
+import json
+
+import pandas as pd
+
+f2 = open('annotations.json')
+useful_input = json.load(f2)
+imgs=useful_input['imgs']
+types=useful_input['types']
+
+values = pd.DataFrame(imgs)
+df =pd.DataFrame.from_dict(values.to_dict(), orient='index')
+df.to_csv('annotations.csv')
