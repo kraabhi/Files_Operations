@@ -1,0 +1,6 @@
+import pandas as pd
+import csv
+
+import pandas as pd
+df = pd.read_fwf('train.txt')
+df.to_csv('train_csv2.csv')
