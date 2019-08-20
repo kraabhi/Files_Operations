@@ -1,3 +1,5 @@
+# Random split of one folder into two
+
 import glob
 #folders_path = os.path.join('/home/eleven/data_traffic/data/merge/', '/home/eleven/data_traffic/data/Test_new/')
 
@@ -19,3 +21,10 @@ for folder in folders_test:
 
 for folder in folders_train:
     shutil.move(folder , dest_train_fold)
+    
+    
+#Split one folder into two on basis of csv file   
+
+dest_folder1 = "Test_new/"
+for i in test_csv["id"]:
+    shutil.copy("merge_2/" + i , dest_folder1)
