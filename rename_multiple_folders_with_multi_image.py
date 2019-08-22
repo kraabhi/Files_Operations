@@ -26,3 +26,16 @@ for i in file_test:
         print(new_file_name)
         os.rename(file, new_file_name)
  
+# rename all files in one folder
+i = 1
+      
+for filename in os.listdir("Train_new/"): 
+    dst ="CAX_Train" + str(i) + ".jpg"
+    src ='Train_new/'+ filename 
+    dst ='Train_new/'+ dst 
+          
+        # rename() function will 
+        # rename all the files 
+    os.rename(src, dst) 
+    i += 1
+  
