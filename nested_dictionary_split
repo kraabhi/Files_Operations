@@ -1,0 +1,17 @@
+test_ann = pd.read_csv("test_annotation_csv.csv")
+names = [i for i in test_ann.id]
+test_list = []
+for i in range(len(test_ann["objects"])):
+    r = eval(test_ann["objects"][i])
+    test_list.append(r)
+
+
+appended_data = []
+for i in test_list:
+    data = pd.DataFrame(i)
+    # store DataFrame in list
+    appended_data.append(data)
+# see pd.concat documentation for more info
+appended_data = pd.concat(appended_data, keys = names)
+
+appended_data.to_csv("append_test2.csv")
