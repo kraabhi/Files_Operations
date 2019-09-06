@@ -1,0 +1,12 @@
+df3 = pd.read_csv("annotations.csv")
+df3.head()
+
+d1 = pd.DataFrame()
+obj2 = []
+image2 = []
+for index , row in df3.iterrows():
+    #print(row)
+    for i in test_id["total"]:
+        if i == row["image"]:
+            obj2.append(row["objects"])
+            image2.append(row["image"])
