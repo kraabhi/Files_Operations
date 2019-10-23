@@ -1,0 +1,3 @@
+# Cd to folder containing xml files and type the following in cmd.
+copy *.xml new.xml  
+
