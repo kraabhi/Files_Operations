@@ -1,0 +1,10 @@
+appended_data = []
+for i in os.listdir():
+    #print(i)
+    f = open(i)
+    use = json.load(f)  # can now use json as dictionary
+    detail = use['children'] #key children is useful
+    df1 = pd.DataFrame(detail)
+    appended_data.append(df1)
+appended_data = pd.concat(appended_data)
+
