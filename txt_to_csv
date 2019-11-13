@@ -1,6 +1,19 @@
 import pandas as pd
 import csv
 
-import pandas as pd
 df = pd.read_fwf('train.txt')
 df.to_csv('train_csv2.csv')
+
+#Multiple text files in one directory to one csv
+
+# path of directory containing text files
+path ="./label_2/"
+#list elements of directory
+#create empty dataframe
+df = pd.DataFrame()
+for filename in os.listdir(path):
+  filepath = os.path.join(path, filename)
+  texttocsv = pd.read_csv(filepath , delimiter = " ", ignore_index = True)
+  for label, xmin, ymin, xmax, ymax in texttocsv.iloc[:,[0,4,5,6,7]].values:
+  df = df.append({"label":label ,"imageid":filename, "xmin":xmin ,"ymin":ymin, "xmax":xmax , "ymax" : ymax})
+df.to_csv("name.csv")                   # save csv in current directory
