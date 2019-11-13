@@ -1,0 +1,8 @@
+df_up = pd.DataFrame()
+for i in f: # f is jsonfile
+    for label_data in i["labels"]:
+        if label_data['category']=='lane' or label_data['category']=='drivable area':
+            continue
+        df_up = df_up.append({"imageid": i["name"] , "label" : label_data["category"], "xmin" : label_data["box2d"]["x1"],"ymin" : label_data["box2d"]["y1"],
+                     "xmax" : label_data["box2d"]["x2"], "ymax" : label_data["box2d"]["y2"]}, ignore_index = True)   
+df.to_csv('/content/drive/My Drive/cax_bdd100k_train.csv', index=False)
