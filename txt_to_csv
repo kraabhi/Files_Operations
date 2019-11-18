@@ -18,7 +18,7 @@ for filename in os.listdir(path):
   df = df.append({"label":label ,"imageid":filename, "xmin":xmin ,"ymin":ymin, "xmax":xmax , "ymax" : ymax})
 df.to_csv("name.csv")                   # save csv in current directory
 
-#Multiple text files with same name in different directory with in one root directory 
+#Multiple text files with same name in different directory with in one root directory to create one folder with all text and one image folder
 #\test\test5_10segs_weather_4_spawn_1_roadTexture_0_P_None_C_None_B_None_WC_None\24-10-2018_22-22-39\modified_labels_kitti
 
 import os
