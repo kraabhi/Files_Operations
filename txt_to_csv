@@ -17,3 +17,24 @@ for filename in os.listdir(path):
   for label, xmin, ymin, xmax, ymax in texttocsv.iloc[:,[0,4,5,6,7]].values:
   df = df.append({"label":label ,"imageid":filename, "xmin":xmin ,"ymin":ymin, "xmax":xmax , "ymax" : ymax})
 df.to_csv("name.csv")                   # save csv in current directory
+
+#Multiple text files with same name in different directory with in one root directory 
+#\test\test5_10segs_weather_4_spawn_1_roadTexture_0_P_None_C_None_B_None_WC_None\24-10-2018_22-22-39\modified_labels_kitti
+
+import os
+import glob
+import shutil
+import re
+
+for file_path in glob.glob("./*/*/*/modified_labels_kitti/*"):
+    
+    if not os.path.exists('llabel'):
+        os.makedirs('llabel')
+   
+    shutil.copy(file_path,"./llabel/"+ '--'.join(re.split("[/\\\]",file_path)[-5:]))
+    
+    if not os.path.exists('iimage'):
+        os.makedirs('iimage')
+    image_src_path="./"+'/'.join(re.split("[/\\\]",file_path)[-5:-2])+"/RGB/"+re.split("[/\\\]",file_path)[-1].split('.')[0]+".png"
+
+    shutil.copy(image_src_path,"./iimage/"+str('--'.join(re.split('[/\\\]',image_src_path)[-5:])))
