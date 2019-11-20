@@ -1,0 +1,8 @@
+import os
+path="./llabel/"
+for filename in os.listdir(path):
+    filepath= os.path.join(path,filename)
+    if os.path.getsize(filepath)==0:
+         if os.path.exists("./iimage/"+'--'.join(filename.split('--')[:3])+'--RGB--'+filename.split('--')[-1].split('.')[0]+'.png'):
+            os.remove("./iimage/"+'--'.join(filename.split('--')[:3])+'--RGB--'+filename.split('--')[-1].split('.')[0]+'.png')
+            os.remove(filepath)
