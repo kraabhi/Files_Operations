@@ -1,0 +1,9 @@
+
+import os
+
+df=pd.read_csv('cax_bdd100k_trainv1.csv')
+name_col=list(set(df.loc[:,'name']))  #Get the unique element from the name column
+path="./train/"
+for filename in os.listdir(path): #iterate through all the train directory files 
+    if filename not in name_col:  # remove the file if not present
+        os.remove(os.path.join(path,filename)) 
