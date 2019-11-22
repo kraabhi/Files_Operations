@@ -1,0 +1,5 @@
+import shutil,os
+
+path='./iimage/'
+for filename in os.listdir(path):
+    shutil.copyfile(os.path.join(path,filename),filename)
