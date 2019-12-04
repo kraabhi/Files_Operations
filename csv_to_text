@@ -1,0 +1,10 @@
+data1 = pd.DataFrame() # create empty data frame
+data1['format'] = df1['name'] # df1 is the csv whose name column is to chane into name + address of image
+
+for i in range(data1.shape[0]):
+    data1["format"][i] = "/mnt/barn/kratika/driving_Dataset_sample/total_dataset_berkley_synthia/train_image_berkley_synthia/"+ data1["format"][i]
+
+for i in range(data1.shape[0]):
+    data1['format'][i] = data1['format'][i] + ',' + str(df1['xmin'][i]) + ',' + str(df1['ymin'][i]) + ',' + str(df1['xmax'][i]) + ',' + str(df1['ymax'][i]) + ',' + df1['label'][i]
+
+data1.to_csv('annotate1.txt', header=None, index=None, sep=' ')
