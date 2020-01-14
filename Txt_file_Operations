@@ -1,1 +1,53 @@
+# 1. Transfer text files present in different folders to one folder
 
+import os
+import glob
+import shutil
+import re
+
+for file_path in glob.glob("./*/*/*/modified_labels_kitti/*"):
+    # print(file_path)
+    # print('Reading path ..... Wait...')
+    # # print(file_path)
+    if not os.path.exists('llabel'):
+        os.makedirs('llabel')
+
+    # print("./llabel/"+ '--'.join(re.split("[/\\\]",file_path)[-5:]))
+   
+    shutil.copyfile(file_path,"./llabel/"+ '--'.join(re.split("[/\\\]",file_path)[-5:]))
+    # # # shutil.copy(file_path,"/run/user/1000/gvfs/smb-share:server=barn.local,share=datasets/kratika/driving_Dataset_sample/Complete Data/synthia/llabel/"+ '--'.join(re.split("[/\\\]",file_path)[-5:]))
+    
+    if not os.path.exists('iimage'):
+        os.makedirs('iimage')
+    image_src_path="./"+'/'.join(re.split("[/\\\]",file_path)[-5:-2])+"/RGB/"+re.split("[/\\\]",file_path)[-1].split('.')[0]+".png"
+
+    shutil.copyfile(image_src_path,"./iimage/"+str('--'.join(re.split('[/\\\]',image_src_path)[-5:])))
+    print('copying....'	)
+
+# 2. Remove text files of size 0 and corresponding image also
+
+import os
+path="./llabel/"
+for filename in os.listdir(path):
+    filepath= os.path.join(path,filename)
+    if os.path.getsize(filepath)==0:
+         if os.path.exists("./iimage/"+'--'.join(filename.split('--')[:3])+'--RGB--'+filename.split('--')[-1].split('.')[0]+'.png'):
+            os.remove("./iimage/"+'--'.join(filename.split('--')[:3])+'--RGB--'+filename.split('--')[-1].split('.')[0]+'.png')
+            os.remove(filepath)
+    
+# 3. Merge multiple text file into one csv
+
+import os
+import pandas as pd
+
+path="./llabel/"
+df = pd.DataFrame()
+for filename in os.listdir(path):
+    filepath= os.path.join(path,filename)
+    pdtxtdata=pd.read_csv(filepath, delimiter = ' ', header=None)
+    for label, xmin, ymin, xmax, ymax in pdtxtdata.loc[:,[0,4,5,6,7]].values:
+        if label=='DontCare':
+            continue   
+        df=df.append({'label':label,'name':str('--'.join(filename.split('--')[:-2])+'--RGB--'+filename.split('--')[-1].split('.')[0]+'.png'),'xmin':xmin,'ymin':ymin, 'xmax':xmax,'ymax':ymax}, ignore_index=True)
+        
+df.to_csv('cax-synthia.csv', index=False)
