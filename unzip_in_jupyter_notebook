@@ -1,0 +1,4 @@
+from zipfile import ZipFile
+zf = ZipFile('siim.zip', 'r')  # put path of zip file
+zf.extractall('./')  # current path to unzip
+zf.close()
