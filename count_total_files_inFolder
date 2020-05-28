@@ -1,0 +1,5 @@
+files = folders = 0
+for _, directories, filenames in os.walk("cax_train_bg/train"):
+  files +=len(filenames)
+  folders +=len(directories)
+print("files:{}, folders:{}".format(files, folders))
