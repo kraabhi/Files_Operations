@@ -1,0 +1,20 @@
+# check if each word in string has atleast one vowel
+
+def check_word(x):
+    res= 0
+    vowel = ["a", "e","i","o","u"]
+    st_split = x.split(" ")
+    for i in st_split:
+        for j in i:
+            if j in vowel:
+                res = res + 1
+                break
+            else:
+                res= res + 0
+        
+    return(res == len(st_split))
+    
+# Example 
+# st = "the rain is k"  
+# check_word(st)
+# False (as here last word is k with no vowel)
